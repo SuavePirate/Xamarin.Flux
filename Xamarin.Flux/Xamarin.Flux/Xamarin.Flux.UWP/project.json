@@ -1,7 +1,8 @@
 ﻿{
   "dependencies": {
+    "Acr.UserDialogs": "6.3.7",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "Xamarin.Forms": "2.3.3.175"
+    "Xamarin.Forms": "2.3.3.180"
   },
   "frameworks": {
     "uap10.0": {}
