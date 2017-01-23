@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Xamarin.Flux.Views.TodoListPage"
-             BindingContext="{Binding Source={StaticResource Locator}, Path=TodoListPage}"
-             Title="Todo">
+             BindingContext="{Binding Source={StaticResource Locator}, Path=TodoListPage}">
   <ContentPage.ToolbarItems>
     <ToolbarItem Name="Pop" Command="{Binding PopulateCommand}"/>
     <ToolbarItem Name="Create" Command="{Binding CreateCommand}" />

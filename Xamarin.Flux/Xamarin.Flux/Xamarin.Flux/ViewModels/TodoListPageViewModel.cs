@@ -33,9 +33,13 @@ namespace Xamarin.Flux.ViewModels
             get
             {
                 return _createCommand ??
-                    (_createCommand = new RelayCommand(() =>
+                    (_createCommand = new RelayCommand(async () =>
                     {
-                        // TODO: go to create page
+                        var result = await UserDialogs.Instance.PromptAsync(string.Empty, "New", "Done", "Cancel", "Todo...");
+                        if (result.Ok)
+                        {
+                            _todoActions.AddTodo(result.Text);
+                        }
                     }));
             }
         }
@@ -45,9 +49,18 @@ namespace Xamarin.Flux.ViewModels
             get
             {
                 return _editCommand ??
-                    (_editCommand = new RelayCommand<Todo>((t) =>
+                    (_editCommand = new RelayCommand<Todo>(async (t) =>
                     {
-                        // TODO: go to edit page
+                        var result = await UserDialogs.Instance.PromptAsync(new PromptConfig()
+                            .SetText(t.Text)
+                            .SetTitle("Edit")
+                            .SetOkText("Done")
+                            .SetCancelText("Cancel")
+                            .SetPlaceholder("Todo..."));
+                        if (result.Ok)
+                        {
+                            _todoActions.EditTodo(t.Id, result.Text);
+                        }
                     }));
             }
         }
