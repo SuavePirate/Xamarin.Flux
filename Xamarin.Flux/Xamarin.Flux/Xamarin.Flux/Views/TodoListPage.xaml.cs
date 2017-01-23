@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 
-namespace Xamarin.Flux
+namespace Xamarin.Flux.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class TodoListPage : ContentPage
     {
-        public MainPage()
+        public TodoListPage()
         {
             InitializeComponent();
         }

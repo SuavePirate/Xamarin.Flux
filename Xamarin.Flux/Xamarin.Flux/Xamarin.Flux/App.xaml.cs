@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Xamarin.Flux.Views;
 using Xamarin.Forms;
 
 namespace Xamarin.Flux
@@ -13,7 +13,7 @@ namespace Xamarin.Flux
         {
             InitializeComponent();
 
-            MainPage = new Xamarin.Flux.MainPage();
+            MainPage = new NavigationPage(new TodoListPage());
         }
 
         protected override void OnStart()

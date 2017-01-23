@@ -1,8 +1,13 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Flux.Actions;
+using Xamarin.Flux.Stores;
+using Xamarin.Flux.ViewModels;
 
 namespace Xamarin.Flux.Startup
 {
@@ -11,5 +16,24 @@ namespace Xamarin.Flux.Startup
     /// </summary>
     public class IoCConfig
     {
+        public IoCConfig()
+        {
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+        }
+
+        public void RegisterActions()
+        {
+            SimpleIoc.Default.Register<TodoActions>();
+        }
+
+        public void RegisterStores()
+        {
+            SimpleIoc.Default.Register<TodoStore>();
+        }
+
+        public void RegisterViewModels()
+        {
+            SimpleIoc.Default.Register<TodoListPageViewModel>();
+        }
     }
 }

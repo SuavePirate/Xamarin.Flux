@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,21 +12,21 @@ namespace Xamarin.Flux.Stores
     /// <summary>
     /// Event store for holding and managing todo items
     /// </summary>
-    public class TodoStore : BaseStore<List<Todo>>
+    public class TodoStore : BaseStore<ObservableCollection<Todo>>
     {
         /// <summary>
         /// Creates a new store and handles subscriptions to the dispatcher
         /// </summary>
         public TodoStore()
         {
-            Subscribe<Todo>(TodoActionTypes.ADD_TODO);
+            Subscribe<string>(TodoActionTypes.ADD_TODO);
             Subscribe(TodoActionTypes.DELETE_COMPLETED_TODOS);
             Subscribe<string>(TodoActionTypes.DELETE_TODO);
             Subscribe<Todo>(TodoActionTypes.EDIT_TODO);
             Subscribe(TodoActionTypes.TOGGLE_ALL_TODOS);
             Subscribe<string>(TodoActionTypes.TOGGLE_TODO);
 
-            Data = new List<Todo>();
+            Data = new ObservableCollection<Todo>();
         }
 
         /// <summary>
@@ -50,7 +51,11 @@ namespace Xamarin.Flux.Stores
                         });
                         break;
                     case TodoActionTypes.DELETE_COMPLETED_TODOS:
-                        Data.RemoveAll(t => t.IsComplete);
+                        var itemsToRemove = Data.Where(t => t.IsComplete);
+                        foreach(var item in itemsToRemove.ToList())
+                        {
+                            Data.Remove(item);
+                        }
                         break;
                     case TodoActionTypes.DELETE_TODO:
                         var itemToRemove = Data.FirstOrDefault(t => t.Id == data as string);
@@ -63,10 +68,10 @@ namespace Xamarin.Flux.Stores
                             itemToEdit.Text = (data as Todo).Text;
                         break;
                     case TodoActionTypes.TOGGLE_ALL_TODOS:
-                        var areIncomplete = Data.Any(t => !t.IsComplete);
+                        var areAllComplete = !Data.Any(t => !t.IsComplete);
                         foreach(var todo in Data)
                         {
-                            todo.IsComplete = !areIncomplete;
+                            todo.IsComplete = !areAllComplete;
                         }
                         break;
                     case TodoActionTypes.TOGGLE_TODO:
