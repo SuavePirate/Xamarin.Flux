@@ -186,7 +186,7 @@ namespace Xamarin.Flux.ViewModels
             }
             if(_todoStore.Error != null)
             {
-                UserDialogs.Instance.ShowError(_todoStore.Error);
+                UserDialogs.Instance.Alert(_todoStore.Error);
             }
         }
     }

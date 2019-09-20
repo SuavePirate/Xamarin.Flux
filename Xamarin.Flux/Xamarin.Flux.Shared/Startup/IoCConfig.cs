@@ -1,5 +1,5 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +16,6 @@ namespace Xamarin.Flux.Startup
     /// </summary>
     public class IoCConfig
     {
-        public IoCConfig()
-        {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-        }
 
         public void RegisterActions()
         {
