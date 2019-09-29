@@ -6,6 +6,9 @@
              mc:Ignorable="d"
              x:Class="Xamarin.Flux.App">
     <Application.Resources>
-
+        <!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <vm:ViewModelLocator xmlns:vm="clr-namespace:Xamarin.Flux.ViewModels;assembly=Xamarin.Flux" x:Key="Locator" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

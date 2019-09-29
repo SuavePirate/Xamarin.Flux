@@ -1,4 +1,5 @@
 ﻿using System;
+using Xamarin.Flux.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace Xamarin.Flux
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new TodoListPage());
         }
 
         protected override void OnStart()
